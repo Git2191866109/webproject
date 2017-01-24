@@ -1,7 +1,7 @@
 package com.weibo.dashboard.service.impl;
 
-import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.weibo.dashboard.dao.UserMapper;
@@ -11,7 +11,7 @@ import com.weibo.dashboard.service.UserService;
 @Service
 public class UserServiceImpl implements UserService{
 
-	@Resource
+	@Autowired
 	private UserMapper userMapper;
 	
 	public User select(String name) {

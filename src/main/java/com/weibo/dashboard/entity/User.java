@@ -1,6 +1,8 @@
 package com.weibo.dashboard.entity;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable{
 	private int id;
 	private String name;
 	private String password;
@@ -21,5 +23,14 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", password='" + password + '\'' +
+				'}';
 	}
 }

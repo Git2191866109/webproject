@@ -1,4 +1,4 @@
-package com.weibo.util;
+package com.weibo.common;
 
 public class ResponseData {
 	public Object data;

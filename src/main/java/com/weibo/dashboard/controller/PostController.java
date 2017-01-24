@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.weibo.dashboard.entity.Post;
 import com.weibo.dashboard.service.PostService;
-import com.weibo.util.ResponseData;
+import com.weibo.common.ResponseData;
 
 @RestController
 @RequestMapping(value="/post")

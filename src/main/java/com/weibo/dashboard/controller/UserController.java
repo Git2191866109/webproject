@@ -1,37 +1,42 @@
 package com.weibo.dashboard.controller;
 
-import javax.annotation.Resource;
-
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.weibo.dashboard.entity.User;
 import com.weibo.dashboard.service.UserService;
-import com.weibo.util.ResponseData;
+import com.weibo.common.ResponseData;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value="/user")
-public class UserController {
-	@Resource 
-	UserService userService;
-	
+public class UserController extends BaseController{
+	private static Logger log = LogManager.getLogger(CommentController.class.getName());
+
+	@Autowired
+	private UserService userService;
+
+	@RequestMapping("/layout")
+	public String getUserPartialPage() {
+		return "users/layout";
+	}
 	@ResponseBody
 	@RequestMapping(value="/{name}",method=RequestMethod.GET)
-	public ResponseData findUser(@PathVariable("name")String name){
+	public Object findUser(ModelMap modelMap, @PathVariable("name")String name){
 		User user = userService.select(name);
-		return new ResponseData(user);
+		return setSuccessResult(modelMap, user);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/login",method=RequestMethod.POST)
-	public ResponseData accountValid(@RequestBody User user){
+	public Object accountValid(ModelMap modelMap, @RequestBody User user){
+		log.info(modelMap.toString());
 		boolean res = userService.accountValid(user);
-		return new ResponseData(res);
+		return setSuccessResult(modelMap, res);
 	}
+
 	@ResponseBody
 	@RequestMapping(value="/new",method=RequestMethod.POST)
 	public ResponseData insert(@RequestBody User user){
