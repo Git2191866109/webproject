@@ -1,4 +1,4 @@
-package com.weibo.dashboard.controller;
+package com.weibo.dashboard.base;
 
 import com.weibo.common.HttpCode;
 import org.apache.logging.log4j.LogManager;

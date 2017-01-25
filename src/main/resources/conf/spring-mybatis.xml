@@ -27,9 +27,20 @@
     </bean>
 
     <!-- mybatis文件配置，扫描所有mapper文件 -->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean">
+        <description>spring和MyBatis完美整合，不需要mybatis的配置映射文件</description>
     	<property name="dataSource" ref="sampleDataSource"/>
+        <property name="configLocation" value="classpath:conf/mybatis-config.xml" />
     	<property name="mapperLocations" value="classpath:mappers/*.xml"/>
+        <property name="typeAliasesPackage" value="com.weibo.dashboard.entity" />
+        <property name="globalConfig">
+            <bean class="com.baomidou.mybatisplus.entity.GlobalConfiguration">
+                <property name="dbColumnUnderline" value="true" />
+                <property name="sqlInjector">
+                    <bean class="com.baomidou.mybatisplus.mapper.AutoSqlInjector" />
+                </property>
+            </bean>
+        </property>
     </bean>
 
     <!-- spring与mybatis整合配置，扫描所有dao -->
